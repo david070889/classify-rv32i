@@ -1,13 +1,22 @@
 # Assignment 2: Classify
 ## `abs.s`  
-using `sub` to convert the negative integer to positive.  
+This function uses the sub instruction to convert a negative integer to a positive one.  
 e.g. 0 - (-5) = 5  
 ## `argmax.s` 
-using two registers to store the maximum number and the index.(t0 is the num, t1 is the index)  
+This function uses two registers to store the maximum value and its index.  
+* `t0` : Stores the maximum number.
+* `t1` : Stores the corresponding index.  
 ## `dot.s`  
-In order to read the proper position in the memory, we calculate the stride for both matrix0 and matrix1.  
-After that, we detect whether the multiplcand is less than zero or not, and we do the multiply.  
+To properly access the correct position in memory, the stride for both matrix0 and matrix1 is calculated.  
+Afterward, the program checks whether the multiplicand is less than zero and performs the multiplication if valid.  
 ## `matmul.s`  
-
-
-
+This function implements matrix multiplication by iterating over the rows and columns.  
+* The outer loop count is incremented, and the memory location is updated to point to the first element of the next row in `matrix0`.  
+* At the end, the function restores the data from the stack to the registers using outer_loop_end and return.  
+## `relu.s`  
+This function applies the ReLU (Rectified Linear Unit) activation.  
+* If the number is less than zero, it stores 0 at the current memory address.  
+* After the computation, it increments the counter `t1` by 1 and updates the memory address pointer by 4.
+## `read_matrix.s` & `write_matrix.s` & `classify.s`  
+The `mul` operation is added to each of these functions.  
+All inputs to the `mul` operation are all non-negative, so we simply implement it by adding m to the zero-initialized register n times.(e.g. $ m \times n $)
