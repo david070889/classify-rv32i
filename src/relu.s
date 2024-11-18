@@ -25,21 +25,23 @@
 relu:
     li t0, 1             
     blt a1, t0, error     
-    li t1, 0             
+    li t1, 0
+    mv t3, a0             
 
 loop_start:
     # TODO: Add your own implementation
     bgt t0, a1, finish
-    lw t2, 0(a0)
+    lw t2, 0(t3)
     blt t2, t1, LTZ
     addi t0, t0, 1
-    addi a0, a0, 4
+    addi t3, t3, 4
+    j loop_start
 
 LTZ:
     li t2, 0
-    sw t2, 0(a0)
+    sw t2, 0(t3)
     addi t0, t0, 1
-    addi a0, a0, 4
+    addi t3, t3, 4
     j loop_start
 
 finish:

@@ -32,11 +32,48 @@ dot:
     blt a4, t0, error_terminate  
 
     li t0, 0            
-    li t1, 0         
+    li t1, 0
+    li t2, 0
 
+stride1:
+    addi t2, t2, 4
+    addi a3, a3, -1
+    bne a3, zero, stride1
+    add a3, a3, t2
+    li t2, 0
+
+stride2:
+    addi t2, t2, 4
+    addi a4, a4, -1
+    bne a4, zero, stride2
+    add a4, a4, t2
+    li t2, 0
+
+    
 loop_start:
     bge t1, a2, loop_end
     # TODO: Add your own implementation
+    lw t2, 0(a0)
+    lw t3, 0(a1)
+    addi t1, t1, 1
+    add a0, a0, a3
+    add a1, a1, a4
+    j mul
+
+
+mul:
+    beq t3, zero, loop_start
+    beq t2, zero, loop_start
+    blt t2, zero, neg_num
+    add t0, t0, t3 
+    addi t2, t2, -1
+    j mul
+
+neg_num:
+    beq t2, zero, loop_start
+    sub t0, t0, t3 
+    addi t2, t2, 1
+    j neg_num
 
 loop_end:
     mv a0, t0
