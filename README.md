@@ -19,4 +19,6 @@ This function applies the ReLU (Rectified Linear Unit) activation.
 * After the computation, it increments the counter `t1` by 1 and updates the memory address pointer by 4.
 ## `read_matrix.s` & `write_matrix.s` & `classify.s`  
 The `mul` operation is added to each of these functions.  
-All inputs to the `mul` operation are all non-negative, so we simply implement it by adding m to the zero-initialized register n times.(e.g. $ m \times n $)
+All inputs to the `mul` operation are all non-negative, so we simply implement it by adding m to the zero-initialized register n times.(e.g. $m \times n$)  
+## Result
+![result](https://hackmd.io/_uploads/rJoLq0_fJx.png)
